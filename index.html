@@ -816,41 +816,38 @@
             margin: 2rem auto;
             transform-origin: center;
             cursor: pointer;
-            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
-            touch-action: manipulation; /* Improve touch handling */
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
 
-        @media (max-width: 768px) {
+        /* Keep existing hover styles */
+        .feature-card:hover {
+            height: 254px;
+            transform: skew(0deg);
+        }
+
+        /* Add touch-specific styles that don't override hover */
+        .feature-card:active,
+        .feature-card:focus {
+            height: 254px;
+            transform: skew(0deg);
+        }
+
+        .feature-card:active p,
+        .feature-card:focus p {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Add specific styles for touch devices */
+        @media (hover: none) {
             .feature-card {
-                /* Make cards respond to touch immediately without waiting for hover */
-                transition: none;
-                height: auto;
-                min-height: 120px;
+                -webkit-user-select: none;
+                user-select: none;
             }
-
-            .feature-card p {
-                /* Make description always visible on mobile */
-                opacity: 1;
-                transform: none;
-                transition: none;
-                height: auto;
-                display: block;
-            }
-
-            /* Remove hover effects on mobile */
-            .feature-card:hover {
-                height: auto;
-                transform: none;
-            }
-
-            .feature-card:hover p {
-                opacity: 1;
-                transform: none;
-            }
-
-            /* Add active state for touch feedback */
+            
             .feature-card:active {
-                background: rgba(0, 0, 0, 0.08);
+                background: rgba(0, 0, 0, 0.05);
             }
         }
 
