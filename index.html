@@ -828,13 +828,17 @@
 
         /* Add touch-specific styles that don't override hover */
         .feature-card:active,
-        .feature-card:focus {
+        .feature-card:focus,
+        .feature-card:focus-within,
+        .feature-card.touched {  /* Add new touched class */
             height: 254px;
             transform: skew(0deg);
         }
 
         .feature-card:active p,
-        .feature-card:focus p {
+        .feature-card:focus p,
+        .feature-card:focus-within p,
+        .feature-card.touched p {  /* Add new touched class */
             opacity: 1;
             transform: translateY(0);
         }
@@ -1841,6 +1845,21 @@
                         smoothScroll(target, 1000);
                     }
                 });
+            });
+        });
+
+        const cards = document.querySelectorAll('.feature-card');
+        
+        cards.forEach(card => {
+            card.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                this.classList.add('touched');
+            });
+            
+            card.addEventListener('touchend', function() {
+                setTimeout(() => {
+                    this.classList.remove('touched');
+                }, 1000); // Keep expanded for 1 second after touch
             });
         });
     </script>
