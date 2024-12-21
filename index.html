@@ -815,11 +815,43 @@
             color: var(--primary);
             margin: 2rem auto;
             transform-origin: center;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+            touch-action: manipulation; /* Improve touch handling */
         }
 
-        .feature-card:hover {
-            height: 254px;
-            transform: skew(0deg);
+        @media (max-width: 768px) {
+            .feature-card {
+                /* Make cards respond to touch immediately without waiting for hover */
+                transition: none;
+                height: auto;
+                min-height: 120px;
+            }
+
+            .feature-card p {
+                /* Make description always visible on mobile */
+                opacity: 1;
+                transform: none;
+                transition: none;
+                height: auto;
+                display: block;
+            }
+
+            /* Remove hover effects on mobile */
+            .feature-card:hover {
+                height: auto;
+                transform: none;
+            }
+
+            .feature-card:hover p {
+                opacity: 1;
+                transform: none;
+            }
+
+            /* Add active state for touch feedback */
+            .feature-card:active {
+                background: rgba(0, 0, 0, 0.08);
+            }
         }
 
         .dots {
