@@ -1487,6 +1487,36 @@
                 }
             }
         }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                width: 90%;
+                max-width: 400px;
+                margin: 0 auto;
+                padding: 2rem;
+                overflow: hidden; /* Prevent content overflow */
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+                word-wrap: break-word; /* Handle long words */
+                display: flex;
+                flex-direction: column; /* Stack icon and text vertically */
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+                word-wrap: break-word;
+                max-width: 100%; /* Ensure text doesn't overflow */
+            }
+
+            .hero-content .learn-more {
+                margin-top: 1.5rem;
+                width: fit-content; /* Adjust button width to content */
+            }
+        }
     </style>
 </head>
 <body>
@@ -1859,7 +1889,7 @@
             card.addEventListener('touchend', function() {
                 setTimeout(() => {
                     this.classList.remove('touched');
-                }, 1000); // Keep expanded for 1 second after touch
+                }, 3000); // Keep expanded for 1 second after touch
             });
         });
     </script>
