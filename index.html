@@ -1458,6 +1458,31 @@
                 font-size: 0.8rem;
             }
         }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 1.5rem; /* Slightly smaller font size for mobile */
+            }
+        }
+
+        /* Add this after the existing screen styles */
+        @media (max-width: 768px) {
+            .screen {
+                background: repeating-radial-gradient(#000 0 0.0001%, #ffffff 0 0.0002%) 50% 0/2500px
+                    2500px,
+                    repeating-conic-gradient(#000 0 0.0001%, #ffffff 0 0.0002%) 60% 60%/2500px
+                    2500px;
+                background-blend-mode: difference;
+                animation: b 0.2s infinite alternate;
+                will-change: background-position;
+            }
+
+            @keyframes b {
+                100% {
+                    background-position: 50% 0, 60% 50%;
+                }
+            }
+        }
     </style>
 </head>
 <body>
@@ -1591,7 +1616,7 @@
         </section>
 
         <section class="why-us-section">
-            <h2 class="section-title" data-lang="why-title">لماذا نحن؟</h2>
+            <h2 class="section-title" data-lang="why-title">ليش إحنا؟</h2>
             <div class="benefits-container">
                 <div class="benefit-card">
                     <div class="benefit-flex">
@@ -1602,7 +1627,7 @@
                         </div>
                         <div class="benefit-content">
                             <h3 data-lang="delivery-title">تسليم سريع</h3>
-                            <p data-lang="delivery-desc">نلتزم بتسليم مشروعك خلال أسبوع واحد فقط، مع ضمان الجودة والاحترافية</p>
+                            <p data-lang="delivery-desc">منلتزم بتسليم مشروعك خلال أسبوع واحد بس، مع ضمان الجودة والاحترافية</p>
                         </div>
                     </div>
                 </div>
@@ -1616,7 +1641,7 @@
                         </div>
                         <div class="benefit-content">
                             <h3 data-lang="support-title">دعم مستمر</h3>
-                            <p data-lang="support-desc">نقدم الدعم الكامل بعد التسليم لضمان فهمك للمشروع ونجاحك في تقديمه</p>
+                            <p data-lang="support-desc">منقدم الدعم الكامل بعد التسليم عشان تضمن فهمك للمشروع ونجاحك في تقديمه</p>
                         </div>
                     </div>
                 </div>
@@ -1630,7 +1655,7 @@
                         </div>
                         <div class="benefit-content">
                             <h3 data-lang="expertise-title">خبرة واحترافية</h3>
-                            <p data-lang="expertise-desc">فريقنا من المطورين المحترفين يستخدم أحدث التقنيات لتقديم مشاريع عالية الجودة</p>
+                            <p data-lang="expertise-desc">فريقنا من المطورين المحترفين بيستخدم أحدث التقنيات لتقديم مشاريع عالية الجودة</p>
                         </div>
                     </div>
                 </div>
@@ -1710,13 +1735,13 @@
                 'feature3-title': 'تكامل ذكي',
                 'feature3-desc': 'دمج الذكاء الاصطناعي وتوليد ملفات PDF',
                 'features-subtitle': 'حرك المؤشر فوق البطاقات أو اضغط عليها لمعرفة المزيد',
-                'why-title': 'لماذا نحن؟',
+                'why-title': 'ليش إحنا؟',
                 'delivery-title': 'تسليم سريع',
-                'delivery-desc': 'نلتزم بتسليم مشروعك خلال أسبوع واحد فقط، مع ضمان الجودة والاحترافية',
+                'delivery-desc': 'منلتزم بتسليم مشروعك خلال أسبوع واحد بس، مع ضمان الجودة والاحترافية',
                 'support-title': 'دعم مستمر',
-                'support-desc': 'نقدم الدعم الكامل بعد التسليم لضمان فهمك للمشروع ونجاحك في تقديمه',
+                'support-desc': 'منقدم الدعم الكامل بعد التسليم عشان تضمن فهمك للمشروع ونجاحك في تقديمه',
                 'expertise-title': 'خبرة واحترافية',
-                'expertise-desc': 'فريقنا من المطورين المحترفين يستخدم أحدث التقنيات لتقديم مشاريع عالية الجودة',
+                'expertise-desc': 'فريقنا من المطورين المحترفين بيستخدم أحدث التقنيات لتقديم مشاريع عالية الجودة',
                 'contact-title': 'تواصل معنا',
                 'back-to-top': 'رجوع إلى الأعلى ↑',
                 'copyright': '© 2024 ستارت أب بد. جميع الحقوق محفوظة'
