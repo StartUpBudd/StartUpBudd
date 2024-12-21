@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero-section">
+    <h1>Luxury Fragrances</h1>
+    <p>Discover Your Signature Scent</p>
+</div>
+
+<div class="featured-section">
+    <h2>Featured Collections</h2>
+    <div class="products-grid">
+        {% for product in products %}
+        <div class="product-card">
+            <div class="product-image">
+                <img src="{{ product.image_url }}" alt="{{ product.name }}">
+                <div class="hover-overlay">
+                    <a href="{{ url_for('product', id=product.id) }}" class="view-btn">View Details</a>
+                </div>
+            </div>
+            <div class="product-info">
+                <h3>{{ product.name }}</h3>
+                <p class="price">${{ "%.2f"|format(product.price) }}</p>
+                <div class="product-description">{{ product.description[:100] }}...</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="categories-section">
+    <h2>Shop By Category</h2>
+    <div class="category-grid">
+        <div class="category-card">
+            <img src="{{ url_for('static', filename='images/men.jpg') }}" alt="Men">
+            <h3>For Him</h3>
+        </div>
+        <div class="category-card">
+            <img src="{{ url_for('static', filename='images/women.jpg') }}" alt="Women">
+            <h3>For Her</h3>
+        </div>
+        <div class="category-card">
+            <img src="{{ url_for('static', filename='images/unisex.jpg') }}" alt="Unisex">
+            <h3>Unisex</h3>
+        </div>
+    </div>
+</div>
+{% endblock %}
