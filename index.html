@@ -1,47 +1,297 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StartUpBudd | ستارت أب بد</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --text-color: #1f2937;
+            --light-bg: #f3f4f6;
+        }
 
-{% block content %}
-<div class="hero-section">
-    <h1>Luxury Fragrances</h1>
-    <p>Discover Your Signature Scent</p>
-</div>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<div class="featured-section">
-    <h2>Featured Collections</h2>
-    <div class="products-grid">
-        {% for product in products %}
-        <div class="product-card">
-            <div class="product-image">
-                <img src="{{ product.image_url }}" alt="{{ product.name }}">
-                <div class="hover-overlay">
-                    <a href="{{ url_for('product', id=product.id) }}" class="view-btn">View Details</a>
-                </div>
+        body {
+            font-family: 'Cairo', 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        html[lang="en"] body {
+            font-family: 'Poppins', 'Cairo', sans-serif;
+            direction: ltr;
+        }
+
+        .header {
+            background: linear-gradient(rgba(37, 99, 235, 0.9), rgba(30, 64, 175, 0.9));
+            color: white;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .lang-switch {
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .lang-switch:hover {
+            background: var(--light-bg);
+        }
+
+        .hero {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            background: var(--light-bg);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .primary-btn {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .primary-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        .secondary-btn {
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .secondary-btn:hover {
+            background: var(--light-bg);
+        }
+
+        .features {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .contact {
+            background: var(--light-bg);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .social-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp { background: #25D366; }
+        .instagram { background: #E4405F; }
+        .email { background: #EA4335; }
+
+        .social-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">StartUpBudd</div>
+            <button class="lang-switch" onclick="toggleLanguage()">English</button>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1 data-lang="hero-title">ستارت أب بد</h1>
+        <p data-lang="hero-desc">حلول مشاريع تخرج احترافية ومبتكرة لطلاب تكنولوجيا المعلومات</p>
+        <div class="cta-buttons">
+            <a href="#contact" class="cta-btn primary-btn" data-lang="contact-us">تواصل معنا</a>
+            <a href="#features" class="cta-btn secondary-btn" data-lang="learn-more">اعرف المزيد</a>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3 data-lang="feature1-title">تسليم سريع</h3>
+                <p data-lang="feature1-desc">نسلم مشروعك خلال أسبوع واحد فقط مع شرح كامل للكود والإعداد</p>
             </div>
-            <div class="product-info">
-                <h3>{{ product.name }}</h3>
-                <p class="price">${{ "%.2f"|format(product.price) }}</p>
-                <div class="product-description">{{ product.description[:100] }}...</div>
+            <div class="feature-card">
+                <h3 data-lang="feature2-title">دعم مستمر</h3>
+                <p data-lang="feature2-desc">نقدم الدعم الكامل بعد شراء المشروع لضمان نجاحك</p>
+            </div>
+            <div class="feature-card">
+                <h3 data-lang="feature3-title">تقنيات حديثة</h3>
+                <p data-lang="feature3-desc">نستخدم Flask وPython وHTML/CSS/JS لتطوير مشاريع متكاملة</p>
             </div>
         </div>
-        {% endfor %}
-    </div>
-</div>
+    </section>
 
-<div class="categories-section">
-    <h2>Shop By Category</h2>
-    <div class="category-grid">
-        <div class="category-card">
-            <img src="{{ url_for('static', filename='images/men.jpg') }}" alt="Men">
-            <h3>For Him</h3>
+    <section id="contact" class="contact">
+        <h2 data-lang="contact-title">تواصل معنا</h2>
+        <div class="social-links">
+            <a href="https://wa.me/962791058193" class="social-btn whatsapp" target="_blank" data-lang="whatsapp">واتساب</a>
+            <a href="https://instagram.com/startupbudd" class="social-btn instagram" target="_blank" data-lang="instagram">انستغرام</a>
+            <a href="mailto:startupbudd@gmail.com" class="social-btn email" target="_blank" data-lang="email">البريد الإلكتروني</a>
         </div>
-        <div class="category-card">
-            <img src="{{ url_for('static', filename='images/women.jpg') }}" alt="Women">
-            <h3>For Her</h3>
-        </div>
-        <div class="category-card">
-            <img src="{{ url_for('static', filename='images/unisex.jpg') }}" alt="Unisex">
-            <h3>Unisex</h3>
-        </div>
-    </div>
-</div>
-{% endblock %}
+    </section>
+
+    <script>
+        const translations = {
+            ar: {
+                'hero-title': 'ستارت أب بد',
+                'hero-desc': 'حلول مشاريع تخرج احترافية ومبتكرة لطلاب تكنولوجيا المعلومات',
+                'contact-us': 'تواصل معنا',
+                'learn-more': 'اعرف المزيد',
+                'feature1-title': 'تسليم سريع',
+                'feature1-desc': 'نسلم مشروعك خلال أسبوع واحد فقط مع شرح كامل للكود والإعداد',
+                'feature2-title': 'دعم مستمر',
+                'feature2-desc': 'نقدم الدعم الكامل بعد شراء المشروع لضمان نجاحك',
+                'feature3-title': 'تقنيات حديثة',
+                'feature3-desc': 'نستخدم Flask وPython وHTML/CSS/JS لتطوير مشاريع متكاملة',
+                'contact-title': 'تواصل معنا',
+                'whatsapp': 'واتساب',
+                'instagram': 'انستغرام',
+                'email': 'البريد الإلكتروني'
+            },
+            en: {
+                'hero-title': 'StartUpBudd',
+                'hero-desc': 'Professional and Innovative Graduation Projects for IT Students',
+                'contact-us': 'Contact Us',
+                'learn-more': 'Learn More',
+                'feature1-title': 'Fast Delivery',
+                'feature1-desc': 'We deliver your project within one week with full code explanation and setup',
+                'feature2-title': 'Continuous Support',
+                'feature2-desc': 'We provide full support after purchase to ensure your success',
+                'feature3-title': 'Modern Technologies',
+                'feature3-desc': 'We use Flask, Python, and HTML/CSS/JS to develop integrated projects',
+                'contact-title': 'Contact Us',
+                'whatsapp': 'WhatsApp',
+                'instagram': 'Instagram',
+                'email': 'Email'
+            }
+        };
+
+        let currentLang = 'ar';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            document.documentElement.lang = currentLang;
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            document.querySelector('.lang-switch').textContent = currentLang === 'ar' ? 'English' : 'عربي';
+            
+            document.querySelectorAll('[data-lang]').forEach(element => {
+                const key = element.getAttribute('data-lang');
+                element.textContent = translations[currentLang][key];
+            });
+        }
+    </script>
+</body>
+</html>
